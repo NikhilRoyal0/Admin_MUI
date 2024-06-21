@@ -20,7 +20,9 @@ import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import BallotIcon from "@mui/icons-material/Ballot";
 import ViewCarouselIcon from "@mui/icons-material/ViewCarousel";
 import TaskIcon from "@mui/icons-material/Task";
-import SplitscreenIcon from "@mui/icons-material/Splitscreen";
+import GamesIcon from '@mui/icons-material/Games';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import CategoryIcon from '@mui/icons-material/Category';
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import LogoutIcon from "@mui/icons-material/Logout";
 import WalletIcon from "@mui/icons-material/Wallet";
@@ -225,13 +227,34 @@ export const fetchMenuItems = () => (dispatch) => {
     },
     {
       id: 16,
+      title: "Game",
+      icon: GamesIcon,
+      href: "#",
+      visible: isVisible,
+      subItems: [
+        {
+          id: 61,
+          title: "Game List",
+          icon: SportsEsportsIcon,
+          href: "/game/game-list",
+        },
+        {
+          id: 62,
+          title: "Game Category",
+          icon: CategoryIcon,
+          href: "/game/game-category",
+        },
+      ],
+    },
+    {
+      id: 17,
       title: "News",
       icon: NewspaperIcon,
       href: "/news",
       visible: isVisible,
     },
     {
-      id: 17,
+      id: 18,
       title: "Setting",
       icon: ManageAccountsIcon,
       href: "#",
@@ -270,7 +293,7 @@ export const fetchMenuItems = () => (dispatch) => {
       ],
     },
     {
-      id: 17,
+      id: 19,
       title: "Tasks",
       icon: TaskIcon,
       href: "#",
@@ -285,7 +308,7 @@ export const fetchMenuItems = () => (dispatch) => {
       ],
     },
     {
-      id: 18,
+      id: 20,
       title: "Logout",
       icon: LogoutIcon,
       href: "/logout",
