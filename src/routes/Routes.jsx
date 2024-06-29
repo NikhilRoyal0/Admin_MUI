@@ -64,8 +64,8 @@ const routes = createBrowserRouter(
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/register" element={<Registermain />} />
         <Route path="/profile-setting" element={<BasicSetting />} />
-        <Route path="/addon/add-on" element={<Addon />} />
-        <Route path="addon/plans" element={<PlansPage />} />
+        {/* <Route path="/addon/add-on" element={<Addon />} /> */}
+        {/* <Route path="addon/plans" element={<PlansPage />} /> */}
         <Route path="game/game-list" element={<Game_List />} />
         <Route path="game/game-category" element={<Game_Category />} />
         <Route path="/news" element={<NewsPage />} />
@@ -74,24 +74,24 @@ const routes = createBrowserRouter(
         <Route path="/wallet/withdrawal-request" element={<Withdrawal />} />
         <Route path="/upi-lists" element={<UpiList />} />
         <Route path="/recharge-request" element={<Recharge />} />
-        <Route path="/coupon" element={<Coupon />} />
+        {/* <Route path="/coupon" element={<Coupon />} /> */}
         <Route path="/setting/notifications" element={<Notification />} />
-        <Route path="/wallet/next-withdraw" element={<NextWithdraw />} />
+        {/* <Route path="/wallet/next-withdraw" element={<NextWithdraw />} /> */}
         <Route path="/setting/app-setting" element={<AppSetting />} />
         <Route path="/setting/dialogs-list" element={<DialogsList />} />
         <Route path="/setting/banners-list" element={<BannersList />} />
         {/* <Route path="/tasks/task-category" element={<TaskCategory />} /> */}
-        <Route path="/tasks/task-list" element={<TasksList />} />
-        <Route path="/user/user-list/edit-user/:userId" element={<EditUser />} />
-        <Route path="/tasks/task-list/edit-task/:taskId" element={<EditTask />} />
-        <Route path="/addon/plans/edit-plan/:planId" element={<EditPlan />} />
+        {/* <Route path="/tasks/task-list" element={<TasksList />} /> */}
+        {/* <Route path="/user/user-list/edit-user/:userId" element={<EditUser />} /> */}
+        {/* <Route path="/tasks/task-list/edit-task/:taskId" element={<EditTask />} /> */}
+        {/* <Route path="/addon/plans/edit-plan/:planId" element={<EditPlan />} /> */}
         <Route path="/news/edit-news/:newsId" element={<EditNews />} />
         <Route path="/setting/dialogs-list/edit-dialog/:dId" element={<EditDialog />} />
         <Route path="/setting/dialogs-list/add-dialog" element={<AddDialog />} />
         <Route path="/setting/banners-list/edit-banner/:bannerId" element={<EditBanners />} />
         <Route path="/setting/refer-setting" element={<ReferSetting />} />
-        <Route path="/tasks/task-list/add-task" element={<AddTask />} />
-        <Route path="/addon/plans/add-plan" element={<AddPlan />} />
+        {/* <Route path="/tasks/task-list/add-task" element={<AddTask />} /> */}
+        {/* <Route path="/addon/plans/add-plan" element={<AddPlan />} /> */}
         <Route path="/news/add-news" element={<AddNews />} />
         <Route path="/setting/banners-list/add-banner" element={<AddBanner />} />
       </Route>

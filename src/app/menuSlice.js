@@ -178,12 +178,6 @@ export const fetchMenuItems = () => (dispatch) => {
           href: "/wallet/withdrawal-request",
         },
         {
-          id: 44,
-          title: "Next Withdrawal",
-          icon: LocalAtmIcon,
-          href: "/wallet/next-withdraw",
-        },
-        {
           id: 42,
           title: "UPI Lists",
           icon: ListAltIcon,
@@ -194,34 +188,6 @@ export const fetchMenuItems = () => (dispatch) => {
           title: "Recharge Request",
           icon: PaidIcon,
           href: "/recharge-request",
-        },
-      ],
-    },
-    {
-      id: 14,
-      title: "Coupon",
-      icon: BrokenImageIcon,
-      href: "/coupon",
-      visible: isVisible,
-    },
-    {
-      id: 15,
-      title: "Add On",
-      icon: LibraryAddIcon,
-      href: "#",
-      visible: isVisible,
-      subItems: [
-        {
-          id: 30,
-          title: "Plans",
-          icon: LightbulbIcon,
-          href: "/addon/plans",
-        },
-        {
-          id: 31,
-          title: "Add On",
-          icon: ControlPointIcon,
-          href: "/addon/add-on",
         },
       ],
     },
@@ -245,13 +211,6 @@ export const fetchMenuItems = () => (dispatch) => {
           href: "/game/game-category",
         },
       ],
-    },
-    {
-      id: 17,
-      title: "News",
-      icon: NewspaperIcon,
-      href: "/news",
-      visible: isVisible,
     },
     {
       id: 18,
@@ -289,21 +248,6 @@ export const fetchMenuItems = () => (dispatch) => {
           title: "Refer Setting",
           icon: PsychologyIcon,
           href: "/setting/refer-setting",
-        },
-      ],
-    },
-    {
-      id: 19,
-      title: "Tasks",
-      icon: TaskIcon,
-      href: "#",
-      visible: isVisible,
-      subItems: [
-        {
-          id: 38,
-          title: "Task List",
-          icon: FormatListBulletedIcon,
-          href: "/tasks/task-list",
         },
       ],
     },
