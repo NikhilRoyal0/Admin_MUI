@@ -39,9 +39,13 @@ import UpiList from "../components/Wallet/UPI/UpiList";
 import Recharge from "../components/Wallet/Recharge_Request/Recharge";
 import Notification from "../components/Setting/Notifications/Notification";
 import NextWithdraw from "../components/Wallet/UpComing_Withdraw/NextWithdraw";
-import Game_List from "../components/Game/Game_List";
-import Game_Category from "../components/Game/Game_Category";
+import Game_List from "../components/Game_List/Game_List";
+import Game_Category from "../components/Game_Category/Game_Category";
 import Addon from "../components/Plans/AddOn/Addon";
+import AddCategory from "../components/Game_Category/AddCategory";
+import EditCategory from "../components/Game_Category/EditCategory";
+import AddGame from "../components/Game_List/AddGame";
+import EditGame from "../components/Game_List/EditGame";
 // import { getFCMToken } from "../utils/auth";
 
 const routes = createBrowserRouter(
@@ -67,7 +71,11 @@ const routes = createBrowserRouter(
         {/* <Route path="/addon/add-on" element={<Addon />} /> */}
         {/* <Route path="addon/plans" element={<PlansPage />} /> */}
         <Route path="game/game-list" element={<Game_List />} />
+        <Route path="game/game-list/newGame" element={<AddGame />} />
+        <Route path="game/game-list/edit/:gameId" element={<EditGame />} />
         <Route path="game/game-category" element={<Game_Category />} />
+        <Route path="game/game-category/newCategory" element={<AddCategory />} />
+        <Route path="game/game-category/edit/:crId" element={<EditCategory />} />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/user/add-user" element={<AddUser />} />
         <Route path="/user/user-list" element={<UserList />} />

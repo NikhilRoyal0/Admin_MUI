@@ -12,49 +12,55 @@ import {
   DialogTitle,
   Box,
 } from "@mui/material";
-import errorimage from '../../assets/images/errorimage.jpg'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import AddIcon from '@mui/icons-material/Add';
-import CircularProgress from '@mui/material/CircularProgress';
+import errorimage from "../../assets/images/errorimage.jpg";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import AddIcon from "@mui/icons-material/Add";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchNewsData, selectNewsData, selectNewsLoading, selectNewsError, deleteNewsData } from "../../app/NewsSlice";
+import {
+  fetchGameCategoryData,
+  selectGameCategoryData,
+  selectGameCategoryError,
+  selectGameCategoryLoading,
+  deleteGameCategoryData,
+} from "../../app/gameCategorySlice";
 
-
-const Game_List = () => {
+const Game_Category = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const newsData = useSelector(selectNewsData);
-  const isLoading = useSelector(selectNewsLoading);
-  const error = useSelector(selectNewsError);
-  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false)
-  const [newsToDelete, setNewsToDelete] = useState(null);
-  const [selectedNews, setSelectedNews] = useState(null);
+  const GameCategoryData = useSelector(selectGameCategoryData);
+  const isLoading = useSelector(selectGameCategoryLoading);
+  const error = useSelector(selectGameCategoryError);
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+  const [GameCategoryToDelete, setGameCategoryToDelete] = useState(null);
+  const [selectedGameCategory, setSelectedGameCategory] = useState(null);
   const [fullArticleDialogOpen, setFullArticleDialogOpen] = useState(false);
 
-
-  const deleteClick = (news) => {
-    setNewsToDelete(news);
+  const deleteClick = (GameCategory) => {
+    setGameCategoryToDelete(GameCategory);
     setDeleteConfirmationOpen(true);
   };
 
   const handleDeleteConfirm = () => {
-    if (newsToDelete) {
-      dispatch(deleteNewsData(newsToDelete.newsId)).then(() => {
+    if (GameCategoryToDelete) {
+      dispatch(
+        deleteGameCategoryData(GameCategoryToDelete.GameCategoryId)
+      ).then(() => {
         setDeleteConfirmationOpen(false);
-        setNewsToDelete(null);
-        dispatch(fetchNewsData());
+        setGameCategoryToDelete(null);
+        dispatch(fetchGameCategoryData());
       });
     }
   };
 
   const handleDeleteCancel = () => {
     setDeleteConfirmationOpen(false);
-    setNewsToDelete(null);
+    setGameCategoryToDelete(null);
   };
 
   useEffect(() => {
-    dispatch(fetchNewsData());
+    dispatch(fetchGameCategoryData());
   }, [dispatch]);
 
   if (isLoading) {
@@ -89,23 +95,22 @@ const Game_List = () => {
       </Box>
     );
   }
-  const editClick = (News) => {
-    navigate(`edit-news/${News.newsId}`);
+  const editClick = (GameCategory) => {
+    navigate(`edit/${GameCategory.crId}`);
   };
 
   const handleClick = () => {
-    navigate('/news/add-news');
-  }
+    navigate("newCategory");
+  };
 
-  const openFullArticleDialog = (news) => {
-    setSelectedNews(news);
+  const openFullArticleDialog = (GameCategory) => {
+    setSelectedGameCategory(GameCategory);
     setFullArticleDialogOpen(true);
   };
 
   const closeFullArticleDialog = () => {
     setFullArticleDialogOpen(false);
   };
-
 
   return (
     <div style={{ position: "relative" }}>
@@ -121,7 +126,7 @@ const Game_List = () => {
         onClick={handleClick}
       >
         <AddIcon />
-        <Typography sx={{ ml: 1 }}>Add News</Typography>
+        <Typography sx={{ ml: 1 }}>Add Category</Typography>
       </Button>
       <Card>
         <CardContent
@@ -131,7 +136,7 @@ const Game_List = () => {
           }}
         >
           <Grid container sx={{ marginTop: "25px" }}>
-            {newsData.map((News, index) => (
+            {GameCategoryData.map((GameCategory, index) => (
               <Grid
                 key={index}
                 item
@@ -155,8 +160,8 @@ const Game_List = () => {
                   }}
                 >
                   <img
-                    src={News.mediaPath}
-                    alt={News.mediaPath}
+                    src={GameCategory.imageLink}
+                    alt={GameCategory.imageLink}
                     onError={(e) => {
                       e.target.src = errorimage;
                       e.target.alt = "Error Image";
@@ -164,7 +169,7 @@ const Game_List = () => {
                     width="100%"
                     height="210px"
                     style={{
-                      objectFit: 'contain',
+                      objectFit: "contain",
                     }}
                   />
                   <CardContent
@@ -175,14 +180,6 @@ const Game_List = () => {
                     }}
                   >
                     <Typography
-                      sx={{
-                        fontSize: "h4.fontSize",
-                        fontWeight: "500",
-                      }}
-                    >
-                      Date: {News.newsDate}
-                    </Typography>
-                    <Typography
                       color="textSecondary"
                       sx={{
                         fontSize: "14px",
@@ -190,7 +187,7 @@ const Game_List = () => {
                         mt: 1,
                       }}
                     >
-                      {News.newsTitle}
+                      {GameCategory.title}
                     </Typography>
                     <Typography
                       sx={{
@@ -200,22 +197,23 @@ const Game_List = () => {
                         maxWidth: "100%",
                       }}
                     >
-                      {News.newsInfo.length <= 15 ? (
-                        News.newsInfo
+                      {GameCategory.info.length <= 15 ? (
+                        GameCategory.info
                       ) : (
                         <>
-                          {News.newsInfo.split(' ').slice(0, 5).join(' ')}
+                          {GameCategory.info.split(" ").slice(0, 5).join(" ")}
                           <span
                             style={{
                               fontSize: "15px",
-                              color: 'blue',
-                              cursor: 'pointer',
-                              display: 'inline-block',
-                              marginLeft: '4px',
+                              color: "blue",
+                              cursor: "pointer",
+                              display: "inline-block",
+                              marginLeft: "4px",
                             }}
-                            onClick={() => openFullArticleDialog(News)}
+                            onClick={() => openFullArticleDialog(GameCategory)}
                           >
-                            ... <span style={{ display: 'inline' }}>read more</span>
+                            ...{" "}
+                            <span style={{ display: "inline" }}>read more</span>
                           </span>
                         </>
                       )}
@@ -225,7 +223,7 @@ const Game_List = () => {
                     <Button
                       variant="outlined"
                       color="primary"
-                      onClick={() => editClick(News)}
+                      onClick={() => editClick(GameCategory)}
                       sx={{ mt: "auto", ml: 1 }}
                     >
                       Edit
@@ -233,7 +231,7 @@ const Game_List = () => {
                     <Button
                       variant="outlined"
                       color="error"
-                      onClick={() => deleteClick(News)}
+                      onClick={() => deleteClick(GameCategory)}
                       sx={{ mt: "auto", ml: 1 }}
                     >
                       Delete
@@ -245,15 +243,12 @@ const Game_List = () => {
           </Grid>
         </CardContent>
       </Card>
-      <Dialog
-        open={fullArticleDialogOpen}
-        onClose={closeFullArticleDialog}
-      >
-        <DialogTitle>{selectedNews?.newsTitle}</DialogTitle>
+      <Dialog open={fullArticleDialogOpen} onClose={closeFullArticleDialog}>
+        <DialogTitle>{selectedGameCategory?.title}</DialogTitle>
         <DialogContent>
           <img
-            src={selectedNews?.mediaPath}
-            alt={selectedNews?.mediaPath}
+            src={selectedGameCategory?.imageLink}
+            alt={selectedGameCategory?.imageLink}
             onError={(e) => {
               e.target.src = errorimage;
               e.target.alt = "Error Image";
@@ -261,15 +256,11 @@ const Game_List = () => {
             width="100%"
             height="210px"
             style={{
-              objectFit: 'contain',
+              objectFit: "contain",
             }}
           />
-          <Typography>
-            Date: {selectedNews?.newsDate}
-          </Typography>
-          <Typography>
-            News Info: {selectedNews?.newsInfo}
-          </Typography>
+          <Typography>Title: {selectedGameCategory?.title}</Typography>
+          <Typography>Category Info: {selectedGameCategory?.info}</Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={closeFullArticleDialog} color="primary">
@@ -278,21 +269,23 @@ const Game_List = () => {
         </DialogActions>
       </Dialog>
 
-      <Dialog
-        open={deleteConfirmationOpen}
-        onClose={handleDeleteCancel}
-      >
+      <Dialog open={deleteConfirmationOpen} onClose={handleDeleteCancel}>
         <DialogTitle>Delete Confirmation</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Are you sure you want to delete this news?
+            Are you sure you want to delete this Game Category?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button sx={{ mr: 1 }} onClick={handleDeleteCancel} color="primary">
             Cancel
           </Button>
-          <Button sx={{ ml: 1 }} onClick={handleDeleteConfirm} color="error" autoFocus>
+          <Button
+            sx={{ ml: 1 }}
+            onClick={handleDeleteConfirm}
+            color="error"
+            autoFocus
+          >
             Delete
           </Button>
         </DialogActions>
@@ -301,4 +294,4 @@ const Game_List = () => {
   );
 };
 
-export default Game_List;
+export default Game_Category;
