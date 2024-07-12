@@ -22,7 +22,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
-import { AddData } from "../../app/NewsSlice";
+import { AddData } from "../../app/gameCategorySlice";
 import { useNavigate } from "react-router-dom";
 import { baseTheme } from "../../assets/global/Theme-variable";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -55,15 +55,14 @@ const AddCategory = () => {
     }
 
     const form = new FormData();
-    form.append("imageLink", selectedFile);
     form.append("title", formData.title);
     form.append("info", formData.info);
+    form.append("imageLink", selectedFile);
     form.append("status", formData.status);
 
     dispatch(AddData(form))
       .then(() => {
         setIsSuccess(true);
-        console.log(formData);
         setSnackbarOpen(true);
         setTimeout(() => {
           navigate("../game/game-category");
@@ -214,7 +213,7 @@ const AddCategory = () => {
                     <input
                       id="file-input"
                       type="file"
-                      name="mediaPath"
+                      name="imageLink"
                       onChange={handleFileSelect}
                       style={{ display: "none" }}
                       required

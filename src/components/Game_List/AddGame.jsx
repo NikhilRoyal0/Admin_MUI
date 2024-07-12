@@ -22,7 +22,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch } from "react-redux";
-import { AddData } from "../../app/NewsSlice";
+import { AddData } from "../../app/gameListSlice";
 import { useNavigate } from "react-router-dom";
 import { baseTheme } from "../../assets/global/Theme-variable";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -61,7 +61,7 @@ const AddGame = () => {
     event.preventDefault();
     setIsLoading(true); // Start loading
 
-    if (!selectedFile || !gameGraphic1 || !gameGraphic2 || !gameGraphics) {
+    if (!selectedFile || !gameGraphic1 || !gameGraphic2 || !gameGraphic3) {
       setFileWarning("Please select an image file.");
       setIsLoading(false); // Stop loading
       return;

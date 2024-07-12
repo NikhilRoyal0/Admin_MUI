@@ -45,7 +45,7 @@ const Game_Category = () => {
   const handleDeleteConfirm = () => {
     if (GameCategoryToDelete) {
       dispatch(
-        deleteGameCategoryData(GameCategoryToDelete.GameCategoryId)
+        deleteGameCategoryData(GameCategoryToDelete.crId)
       ).then(() => {
         setDeleteConfirmationOpen(false);
         setGameCategoryToDelete(null);

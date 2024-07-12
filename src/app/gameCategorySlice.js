@@ -55,7 +55,7 @@ export const fetchGameCategoryData = () => async (dispatch) => {
 
 export const AddData = (form) => async () => {
   try {
-    const response = await axios.post(import.meta.env.VITE_BASE_URL + 'feature/insertGameCategory', form, {
+    const response = await axios.post(import.meta.env.VITE_BASE_URL + 'client/addCategory', form, {
       headers: {
         'Content-Type': 'multipart/form-data',
       }
@@ -70,7 +70,7 @@ export const updateGameCategoryData = (crId, data) => async (dispatch) => {
   try {
 
     const response = await axios.put(
-      import.meta.env.VITE_BASE_URL + `feature/updateGameCategory/${crId}`,
+      import.meta.env.VITE_BASE_URL + `client/updateCategory/${crId}`,
       data,
       {
         headers: {
@@ -92,7 +92,7 @@ export const deleteGameCategoryData = (crId, data) => async (dispatch) => {
   try {
 
     const response = await axios.delete(
-      import.meta.env.VITE_BASE_URL + `feature/deleteGameCategory/${crId}`,
+      import.meta.env.VITE_BASE_URL + `client/deleteCategory/${crId}`,
       data,
       {
         headers: {

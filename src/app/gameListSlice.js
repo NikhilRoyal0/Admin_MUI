@@ -24,11 +24,11 @@ const GameListSlice = createSlice({
     },
     updateGameList: (state, action) => {
       const updatedGameList = action.payload;
-      state.data.map((GameList) => GameList.GameListId === updatedGameList.GameListId);
+      state.data.map((GameList) => GameList.gameId === updatedGameList.gameId);
     },
     deleteGameList: (state, action) => {
-      const GameListIdToDelete = action.payload;
-      state.data = state.data.filter((GameList) => GameList.GameListId !== GameListIdToDelete);
+      const gameIdToDelete = action.payload;
+      state.data = state.data.filter((GameList) => GameList.gameId !== gameIdToDelete);
       state.isLoading = false;
       state.error = null;
     },
@@ -55,7 +55,7 @@ export const fetchGameListData = () => async (dispatch) => {
 
 export const AddData = (form) => async () => {
   try {
-    const response = await axios.post(import.meta.env.VITE_BASE_URL + 'feature/insertGameList', form, {
+    const response = await axios.post(import.meta.env.VITE_BASE_URL + 'client/addGame', form, {
       headers: {
         'Content-Type': 'multipart/form-data',
       }
@@ -66,11 +66,11 @@ export const AddData = (form) => async () => {
   }
 }
 
-export const updateGameListData = (GameListId, data) => async (dispatch) => {
+export const updateGameListData = (gameId, data) => async (dispatch) => {
   try {
 
     const response = await axios.put(
-      import.meta.env.VITE_BASE_URL + `feature/updateGameList/${GameListId}`,
+      import.meta.env.VITE_BASE_URL + `client/updateGame/${gameId}`,
       data,
       {
         headers: {
@@ -88,11 +88,11 @@ export const updateGameListData = (GameListId, data) => async (dispatch) => {
   }
 }
 
-export const deleteGameListData = (GameListId, data) => async (dispatch) => {
+export const deleteGameListData = (gameId, data) => async (dispatch) => {
   try {
 
     const response = await axios.delete(
-      import.meta.env.VITE_BASE_URL + `feature/deleteGameList/${GameListId}`,
+      import.meta.env.VITE_BASE_URL + `client/deleteGame/${gameId}`,
       data,
       {
         headers: {
