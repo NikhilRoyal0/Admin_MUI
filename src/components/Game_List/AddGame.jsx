@@ -21,15 +21,24 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CloseIcon from "@mui/icons-material/Close";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AddData } from "../../app/gameListSlice";
 import { useNavigate } from "react-router-dom";
 import { baseTheme } from "../../assets/global/Theme-variable";
 import LoadingButton from "@mui/lab/LoadingButton";
+import {
+  fetchGameCategoryData,
+  selectGameCategoryData,
+  selectGameCategoryError,
+  selectGameCategoryLoading,
+} from "../../app/gameCategorySlice";
 
 const AddGame = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const categoryData = useSelector(selectGameCategoryData);
+  const categoryError = useSelector(selectGameCategoryError);
+  const categoryLoading = useSelector(selectGameCategoryLoading);
   const [selectedFile, setSelectedFile] = React.useState(null);
   const [gameGraphic1, setgameGraphic1] = React.useState(null);
   const [gameGraphic2, setgameGraphic2] = React.useState(null);
@@ -182,6 +191,39 @@ const AddGame = () => {
   const handlePopoverClose = () => {
     setPopoverAnchor(null);
   };
+
+  if (categoryLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress color="primary" size={120} thickness={4} />
+      </div>
+    );
+  }
+
+  if (categoryError) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="50vh"
+      >
+        <Typography variant="h4" color="error" gutterBottom>
+          Oops! Something went wrong.
+        </Typography>
+        <Typography variant="body1" color="textSecondary" align="center">
+          {error}
+        </Typography>
+      </Box>
+    );
+  }
 
   return (
     <div>
@@ -436,18 +478,27 @@ const AddGame = () => {
               )}
 
               <Grid item xs={12} md={6}>
-                <TextField
-                  id="categoryId"
-                  label="Category Id"
-                  name="categoryId"
+                <FormControl
                   variant="outlined"
                   fullWidth
                   required
-                  onChange={handleInputChange}
-                  sx={{
-                    mb: 2,
-                  }}
-                />
+                  sx={{ mb: 2 }}
+                >
+                  <InputLabel id="category-label">Category</InputLabel>
+                  <Select
+                    labelId="category-label"
+                    id="categoryId"
+                    name="categoryId"
+                    onChange={handleInputChange}
+                    label="Category"
+                  >
+                    {categoryData.map((category) => (
+                      <MenuItem key={category.crId} value={category.crId}>
+                        {category.title}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={12} md={6}>
                 <TextField

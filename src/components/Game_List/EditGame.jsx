@@ -27,10 +27,19 @@ import {
   updateGameListData,
 } from "../../app/gameListSlice";
 import { baseTheme } from "../../assets/global/Theme-variable";
+import {
+  fetchGameCategoryData,
+  selectGameCategoryData,
+  selectGameCategoryError,
+  selectGameCategoryLoading,
+} from "../../app/gameCategorySlice";
 
 const EditGame = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const categoryData = useSelector(selectGameCategoryData);
+  const categoryError = useSelector(selectGameCategoryError);
+  const categoryLoading = useSelector(selectGameCategoryLoading);
   const { gameId: gameIdParam } = useParams();
   const [editMode, setEditMode] = useState(false);
   const [popoverAnchor, setPopoverAnchor] = useState(null);
@@ -124,7 +133,7 @@ const EditGame = () => {
       }
     }
   };
-  
+
   const [loading, setLoading] = useState(true);
   const gameData = useSelector(selectGameListData);
 
@@ -175,6 +184,39 @@ const EditGame = () => {
     setEditMode((prevEditMode) => !prevEditMode);
   };
 
+  if (categoryLoading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress color="primary" size={120} thickness={4} />
+      </div>
+    );
+  }
+
+  if (categoryError) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="50vh"
+      >
+        <Typography variant="h4" color="error" gutterBottom>
+          Oops! Something went wrong.
+        </Typography>
+        <Typography variant="body1" color="textSecondary" align="center">
+          {error}
+        </Typography>
+      </Box>
+    );
+  }
+
   return (
     <Card>
       <CardContent>
@@ -184,7 +226,12 @@ const EditGame = () => {
         <br />
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-          {["gameThumbnail", "gameGraphics1", "gameGraphics2", "gameGraphics3"].map((imageType, index) => (
+            {[
+              "gameThumbnail",
+              "gameGraphics1",
+              "gameGraphics2",
+              "gameGraphics3",
+            ].map((imageType, index) => (
               <Grid item xs={12} md={3} key={index}>
                 <Card
                   variant="outlined"
@@ -249,15 +296,22 @@ const EditGame = () => {
             ))}
 
             <Grid item xs={12} sm={6}>
-              <TextField
-                label="Category Id"
-                variant="outlined"
-                name="categoryId"
-                onChange={handleTextChange}
-                fullWidth
-                value={data && data.categoryId}
-                disabled={!editMode}
-              />
+              <FormControl variant="outlined" fullWidth disabled={!editMode}>
+                <InputLabel id="category-select-label">Category</InputLabel>
+                <Select
+                  labelId="category-select-label"
+                  label="Category"
+                  name="categoryId"
+                  value={data && data.categoryId}
+                  onChange={handleTextChange}
+                >
+                  {categoryData.map((category) => (
+                    <MenuItem key={category.crId} value={category.crId}>
+                      {category.title}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
