@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -26,6 +26,7 @@ import { AddData } from "../../app/gameListSlice";
 import { useNavigate } from "react-router-dom";
 import { baseTheme } from "../../assets/global/Theme-variable";
 import LoadingButton from "@mui/lab/LoadingButton";
+import CircularProgress from "@mui/material/CircularProgress";
 import {
   fetchGameCategoryData,
   selectGameCategoryData,
@@ -65,6 +66,10 @@ const AddGame = () => {
     status: "",
     totalPlayed: "",
   });
+
+  useEffect(() => {
+      dispatch(fetchGameCategoryData());
+  }, [dispatch]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

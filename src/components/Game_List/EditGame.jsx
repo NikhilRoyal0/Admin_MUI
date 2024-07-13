@@ -16,6 +16,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Box,
 } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import CloseIcon from "@mui/icons-material/Close";
@@ -151,6 +152,10 @@ const EditGame = () => {
       fetchgameDataById();
     }
   }, [gameIdParam, dispatch, gameData]);
+
+  useEffect(() => {
+    dispatch(fetchGameCategoryData());
+}, [dispatch]);
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === "clickaway") {
